@@ -13,6 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTP.IoT", "MTP.IoT\MTP.IoT.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTP.PGKitSensorsApp", "MTP.PGKitSensorsApp\MTP.PGKitSensorsApp.csproj", "{823A12A9-2613-4FF0-A87E-83E765C58D6B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{31790523-D415-4255-825F-F0DDF3F17908}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\Intro_to_Electronics_1.pptx = Documentation\Intro_to_Electronics_1.pptx
+		Documentation\Intro_to_Sensors.pptx = Documentation\Intro_to_Sensors.pptx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
