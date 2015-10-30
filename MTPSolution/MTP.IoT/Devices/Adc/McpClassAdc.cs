@@ -91,57 +91,53 @@ namespace MTP.IoT.Devices.Adc
         {
             // Validate
             if ((channelNumber < 0) || (channelNumber > ChannelCount)) throw new ArgumentOutOfRangeException("channelNumber");
-
-            // Make sure we're initialized
             EnsureInitializedAsync().Wait();
-
-            // The code below is based on the MCP3208 spec sheet by Microchip
-            // http://ww1.microchip.com/downloads/en/DeviceDoc/21298e.pdf
-
+            // The code below is based on the MCP3008 spec sheet by Microchip
             // Buffers to hold write and read data
-            byte[] writeBuffer = new byte[4] { 0x00, 0x00, 0x00, 0x00 };
-            byte[] readBuffer = new byte[4];
-
-            // From http://forum.arduino.cc/index.php?topic=53082.0:
-            // 2 bytes need to be written to the ADC before values will start coming out:
-            // 000001 < S / D >< D2 >  < D1 >< D0 > XXXXXX
-            // S / D represents single mode or differential mode ADC calculation:  1 for single, 0 for differential
-            // D2, D1, D0 represent the channel select.
-            UInt32 command = 0x0;
+            byte[] writeBuffer = new byte[3] { 0x00, 0x00, 0x00 };
+            byte[] readBuffer = new byte[3];
+            //this is two bytes.
+            UInt16 command = 0x0;
             if (ChannelMode == ProviderAdcChannelMode.Differential)
             {
                 //leading bits changes depending on resolution of ADC
-                int leadingBits = 7;
-                int shiftLeftNum = 30 - leadingBits; //32 - 1 - 1 - leading bits
-                int channelShifter = 20;
-                command = (UInt32)((0x01 << shiftLeftNum)
-                           | ((Int32)channelNumber << channelShifter));
+                int shiftLeftNum = 8; // 15 - 7 
+                //shift the channel selection to be after start bit
+                //and mode bit
+                int channelShifter = 13;  
+                //0x01 is 0001 in binary
+                command = (UInt16)((0x01 << shiftLeftNum) //start bit + single bit
+                           | ((Int16)channelNumber << channelShifter));
             }
             else
             {
                 //leading bits changes depending on resolution of ADC
-                int leadingBits = 7;
-                int shiftLeftNum = 30 - leadingBits; //32 - 1 - 1 - leading bits
-                int channelShifter = 20;
-                command = (UInt32)((0x03 << shiftLeftNum)
-                           |  ( (Int32)channelNumber << channelShifter ) );                
+                int shiftLeftNum = 8; // 15 - 7 
+                //shift the channel selection to be after start bit
+                //and mode bit
+                int channelShifter = 13;
+                //0x03 is 0011 in binary
+                command = (UInt16)((0x03 << shiftLeftNum) //start bit + single bit
+                           |  ( (Int16)channelNumber << channelShifter ) );                
             }
             var commandBytes = BitConverter.GetBytes(command);
-            writeBuffer[0] = commandBytes[3];
-            writeBuffer[1] = commandBytes[2];
+            writeBuffer[0] = commandBytes[1];
+            writeBuffer[1] = commandBytes[0];
 
             // Write command and read data from the ADC in one line
             spiDevice.TransferFullDuplex(writeBuffer, readBuffer);
 
-            // Convert the returned bytes into an integer value
-            //ignore null bit, and then read resolution bits, rest is padding.            
-            UInt32 result = BitConverter.ToUInt32(readBuffer, 0);
-            //ignore first 2 cycles + null bit
-            //readBuffer = new byte[] { readBuffer[2], readBuffer[3] };
-            result = result << 22;
-            result = result >> 22;
-
-            //Todo: Change interface to work explicity with UInt32
+            //bit mask result to ditch all of first 
+            //byte except value
+            //This changes depending on ADC resolution
+            int result = readBuffer[1] & 0x03;
+            //Shift these bits by a full byte 
+            //as they are most significant bits
+            result <<= 8;
+            //Add the second byte as an int to the result.
+            //C# rocks.
+            result += readBuffer[2];
+            //return the result
             return (int)result;
         }
 

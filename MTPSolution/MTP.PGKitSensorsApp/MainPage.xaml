@@ -13,21 +13,17 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height ="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Foreground="White" FontSize="48" FontWeight="Bold" Grid.Row="0" TextWrapping="Wrap" HorizontalAlignment="Center">
             Light, Temperature and Pressure Sensors.
         </TextBlock>
-        <TextBlock Foreground="White" FontSize="36"  Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center">
-            Light Sensor
+        <TextBlock x:Name="LightProgress" Grid.Row="1" Foreground="White" FontSize="36" VerticalAlignment="Center" HorizontalAlignment="Center">
+            Light: Not Set
         </TextBlock>
-        <TextBlock x:Name="LightProgress" Grid.Row="2" Foreground="White" FontSize="36" VerticalAlignment="Center" HorizontalAlignment="Center">
-            Not Set
+        <TextBlock x:Name="TemperatureProgress" Foreground="White" FontSize="36"  Grid.Row="2" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center">
+            Temperature: Not Set
         </TextBlock>
         <TextBlock Foreground="White" FontSize="36"  Grid.Row="3" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center">
-            Temperature Sensor
-        </TextBlock>
-        <TextBlock Foreground="White" FontSize="36"  Grid.Row="4" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center">
             Pressure Sensor
         </TextBlock>
     </Grid>

@@ -27,6 +27,7 @@ namespace MTP.PGKitSensorsApp
         //List used to average values, as you will get weird sensory input occasionally.
         //This helps smooth the output.
         private List<double> lightVals;
+        private List<double> tempVals;
 
         public MainPage()
         {
@@ -43,9 +44,15 @@ namespace MTP.PGKitSensorsApp
             adcManager = new AdcProviderManager();
             lightVals = new List<double>();
             //Insert 10 dummy values to initialize.
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 30; i++)
             {
                 lightVals.Add(0);
+            }
+
+            tempVals = new List<double>();
+            for(int i = 0; i < 30; i++)
+            {
+                tempVals.Add(0);
             }
             //Initialize MCP3008 device.
             //Remember, 8 channels, 10 bit resolution
@@ -70,11 +77,50 @@ namespace MTP.PGKitSensorsApp
                 //Channel 7 as this is where we wired the photo resistor to.
                 AdcChannel = adcControllers[0].OpenChannel(7),
                 //every 500 milliseconds, grab read the value.
-                ReportInterval = 500,
+                ReportInterval = 250
             };
             //Attach a function to the event we fire every 500 milliseconds.
             lightSensor.ReadingChanged += LightSensor_ReadingChanged;
+
+            #region Temp Sensor Cheat Codes
+            var tempSensor = new AnalogSensor()
+            {
+                AdcChannel = adcControllers[0].OpenChannel(6),
+                ReportInterval = 250
+            };
+            tempSensor.ReadingChanged += TempSensor_ReadingChanged;
+            #endregion Temp Sensor Cheat Codes
         }
+
+        private async void TempSensor_ReadingChanged(IAnalogSensor sender, AnalogSensorReadingChangedEventArgs args)
+        {
+            var reading = args.Reading.Value;
+            tempVals.Add(((9/5) * (reading / 10)) + 32);
+            tempVals.RemoveAt(0);
+            double temp = tempVals.Average();
+            #region comment this out if running headless.
+            await Dispatcher.RunIdleAsync((s) =>
+            {
+                // Value
+                TemperatureProgress.Text = "Temperature: " + temp.ToString() + "deg F";
+
+                // Color
+                if (temp < 40)
+                {
+                    TemperatureProgress.Foreground = new SolidColorBrush(Colors.Blue);
+                }
+                else if (temp < 80)
+                {
+                    TemperatureProgress.Foreground = new SolidColorBrush(Colors.Yellow);
+                }
+                else
+                {
+                    TemperatureProgress.Foreground = new SolidColorBrush(Colors.Red);
+                }
+            });
+            #endregion comment this out if running headless.
+        }
+
         /// <summary>
         /// Event Handler for Light Sensor Reading Changed.
         /// </summary>
@@ -85,7 +131,7 @@ namespace MTP.PGKitSensorsApp
             //Read the ratio, which is readvalue/maxvalue
             var reading = args.Reading.Ratio;
             //Add reading to end of list
-            lightVals.Add(reading);
+            lightVals.Add(reading * 100);
             //remove first reading.  Constant size of list is 10.
             lightVals.RemoveAt(0);
             //Smooth the reading out by averaging all 10
@@ -97,14 +143,14 @@ namespace MTP.PGKitSensorsApp
             await Dispatcher.RunIdleAsync((s) =>
             {
                 // Value
-                LightProgress.Text = avg.ToString();
+                LightProgress.Text = "Light: " + avg.ToString() + "%";
 
                 // Color
-                if (avg < .25)
+                if (avg < 25)
                 {
                     LightProgress.Foreground = new SolidColorBrush(Colors.Red);
                 }
-                else if (avg < .75)
+                else if (avg < 75)
                 {
                     LightProgress.Foreground = new SolidColorBrush(Colors.Yellow);
                 }
