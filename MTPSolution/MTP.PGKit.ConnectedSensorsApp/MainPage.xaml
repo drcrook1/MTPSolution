@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="MTP.PGKit.ConnectedSensorsApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MTP.PGKit.ConnectedSensorsApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height ="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Foreground="White" FontSize="48" FontWeight="Bold" Grid.Row="0" TextWrapping="Wrap" HorizontalAlignment="Center">
+            Light, Temperature and Pressure Sensors.
+        </TextBlock>
+        <TextBlock x:Name="LightProgress" Grid.Row="1" Foreground="White" FontSize="36" VerticalAlignment="Center" HorizontalAlignment="Center">
+            Light: Not Set
+        </TextBlock>
+        <TextBlock x:Name="TemperatureProgress" Foreground="White" FontSize="36"  Grid.Row="2" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center">
+            Temperature: Not Set
+        </TextBlock>
+        <TextBlock Foreground="White" FontSize="36"  Grid.Row="3" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center">
+            Pressure Sensor
+        </TextBlock>
+    </Grid>
+</Page>

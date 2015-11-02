@@ -107,7 +107,7 @@ namespace MTP.PGKitSensorsApp
                 // Color
                 if (temp < 40)
                 {
-                    TemperatureProgress.Foreground = new SolidColorBrush(Colors.Blue);
+                    TemperatureProgress.Foreground = new SolidColorBrush(Colors.LightBlue);
                 }
                 else if (temp < 80)
                 {
@@ -148,7 +148,7 @@ namespace MTP.PGKitSensorsApp
                 // Color
                 if (avg < 25)
                 {
-                    LightProgress.Foreground = new SolidColorBrush(Colors.Red);
+                    LightProgress.Foreground = new SolidColorBrush(Colors.OrangeRed);
                 }
                 else if (avg < 75)
                 {
