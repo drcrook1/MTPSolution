@@ -4,21 +4,16 @@ using Microsoft.IoT.Devices.Sensors;
 using MTP.IoT.Devices.Adc;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Devices.Adc.Provider;
 using Windows.Devices.Gpio;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+using Microsoft.Azure.Devices.Client;
+using System.Text;
+using MTP.DeviceCore.TelemetryObj;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -29,13 +24,16 @@ namespace MTP.PGKit.ConnectedSensorsApp
     /// </summary>
     public sealed partial class MainPage : Page
     {
-            //Variables required for project
-            private GpioController gpioController;
-            private AdcProviderManager adcManager;
-            //List used to average values, as you will get weird sensory input occasionally.
-            //This helps smooth the output.
-            private List<double> lightVals;
-            private List<double> tempVals;
+        //Variables required for project
+        private GpioController gpioController;
+        private AdcProviderManager adcManager;
+        //List used to average values, as you will get weird sensory input occasionally.
+        //This helps smooth the output.
+        private List<double> lightVals;
+        private List<double> tempVals;
+        DeviceClient deviceClient;
+        private string Location = "MIC Miami";
+        private string DeviceId = "PGKit1";
 
             public MainPage()
             {
@@ -51,6 +49,10 @@ namespace MTP.PGKit.ConnectedSensorsApp
                 IAdcControllerProvider MCP3008_SPI0 = new McpClassAdc();
                 adcManager = new AdcProviderManager();
                 lightVals = new List<double>();
+                deviceClient = DeviceClient
+                                .CreateFromConnectionString("<YOURCONNECTIONSTRING>", 
+                                TransportType.Http1);
+
                 //Insert 10 dummy values to initialize.
                 for (int i = 0; i < 30; i++)
                 {
@@ -94,40 +96,52 @@ namespace MTP.PGKit.ConnectedSensorsApp
                 var tempSensor = new AnalogSensor()
                 {
                     AdcChannel = adcControllers[0].OpenChannel(6),
-                    ReportInterval = 250
+                    ReportInterval = 1000
                 };
                 tempSensor.ReadingChanged += TempSensor_ReadingChanged;
                 #endregion Temp Sensor Cheat Codes
             }
 
-            private async void TempSensor_ReadingChanged(IAnalogSensor sender, AnalogSensorReadingChangedEventArgs args)
+        private async void TempSensor_ReadingChanged(IAnalogSensor sender, AnalogSensorReadingChangedEventArgs args)
+        {
+            var reading = args.Reading.Value;
+            tempVals.Add(((9 / 5) * (reading / 10)) + 32);
+            tempVals.RemoveAt(0);
+            double temp = tempVals.Average();
+            #region comment this out if running headless.
+            await Dispatcher.RunIdleAsync((s) =>
             {
-                var reading = args.Reading.Value;
-                tempVals.Add(((9 / 5) * (reading / 10)) + 32);
-                tempVals.RemoveAt(0);
-                double temp = tempVals.Average();
-                #region comment this out if running headless.
-                await Dispatcher.RunIdleAsync((s) =>
-                {
-                    // Value
-                    TemperatureProgress.Text = "Temperature: " + temp.ToString() + "deg F";
+                // Value
+                TemperatureProgress.Text = "Temperature: " + temp.ToString() + "deg F";
 
-                    // Color
-                    if (temp < 40)
-                    {
-                        TemperatureProgress.Foreground = new SolidColorBrush(Colors.LightBlue);
-                    }
-                    else if (temp < 80)
-                    {
-                        TemperatureProgress.Foreground = new SolidColorBrush(Colors.Yellow);
-                    }
-                    else
-                    {
-                        TemperatureProgress.Foreground = new SolidColorBrush(Colors.Red);
-                    }
-                });
-                #endregion comment this out if running headless.
+                // Color
+                if (temp < 40)
+                {
+                    TemperatureProgress.Foreground = new SolidColorBrush(Colors.LightBlue);
+                }
+                else if (temp < 80)
+                {
+                    TemperatureProgress.Foreground = new SolidColorBrush(Colors.Yellow);
+                }
+                else
+                {
+                    TemperatureProgress.Foreground = new SolidColorBrush(Colors.Red);
+                }
+            });
+            #endregion comment this out if running headless.
+            TemperatureEvent te = new TemperatureEvent();
+            te.Location = this.Location;
+            te.DeviceId = this.DeviceId;
+            te.Temperature = (float)temp;
+            te.CollectionTime = DateTime.UtcNow;
+            var text = te.ToString();
+            var msg = new Message(Encoding.UTF8.GetBytes(text));
+            try {
+                await deviceClient.SendEventAsync(msg);
             }
+            catch(Exception e) { }
+
+        }
 
             /// <summary>
             /// Event Handler for Light Sensor Reading Changed.

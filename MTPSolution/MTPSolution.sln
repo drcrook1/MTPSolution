@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTP.Core", "MTP.Core\MTP.Core.csproj", "{1B1C09A8-074E-44C9-BB05-5F662C49AB0F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTP.BlinkyApp", "MTP.BlinkyApp\MTP.BlinkyApp.csproj", "{EA273831-8221-4C07-9718-491BB405E3E4}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "MTP.TelemetryDatabase", "MTP.TelemetryDatabase\MTP.TelemetryDatabase.sqlproj", "{9BAA8443-13E7-402F-8A7D-23985964DF32}"
@@ -21,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTP.PGKit.ConnectedSensorsApp", "MTP.PGKit.ConnectedSensorsApp\MTP.PGKit.ConnectedSensorsApp.csproj", "{E96CE5C6-9F7C-4321-A0B8-F3C33FD79356}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTP.DeviceCore", "MTP.DeviceCore\MTP.DeviceCore.csproj", "{09D1FCBB-76FF-42B7-9344-6BB45AC5CEC3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,22 +33,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1B1C09A8-074E-44C9-BB05-5F662C49AB0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B1C09A8-074E-44C9-BB05-5F662C49AB0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B1C09A8-074E-44C9-BB05-5F662C49AB0F}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{1B1C09A8-074E-44C9-BB05-5F662C49AB0F}.Debug|ARM.Build.0 = Debug|Any CPU
-		{1B1C09A8-074E-44C9-BB05-5F662C49AB0F}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{1B1C09A8-074E-44C9-BB05-5F662C49AB0F}.Debug|x64.Build.0 = Debug|Any CPU
-		{1B1C09A8-074E-44C9-BB05-5F662C49AB0F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{1B1C09A8-074E-44C9-BB05-5F662C49AB0F}.Debug|x86.Build.0 = Debug|Any CPU
-		{1B1C09A8-074E-44C9-BB05-5F662C49AB0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B1C09A8-074E-44C9-BB05-5F662C49AB0F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B1C09A8-074E-44C9-BB05-5F662C49AB0F}.Release|ARM.ActiveCfg = Release|Any CPU
-		{1B1C09A8-074E-44C9-BB05-5F662C49AB0F}.Release|ARM.Build.0 = Release|Any CPU
-		{1B1C09A8-074E-44C9-BB05-5F662C49AB0F}.Release|x64.ActiveCfg = Release|Any CPU
-		{1B1C09A8-074E-44C9-BB05-5F662C49AB0F}.Release|x64.Build.0 = Release|Any CPU
-		{1B1C09A8-074E-44C9-BB05-5F662C49AB0F}.Release|x86.ActiveCfg = Release|Any CPU
-		{1B1C09A8-074E-44C9-BB05-5F662C49AB0F}.Release|x86.Build.0 = Release|Any CPU
 		{EA273831-8221-4C07-9718-491BB405E3E4}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{EA273831-8221-4C07-9718-491BB405E3E4}.Debug|ARM.ActiveCfg = Debug|ARM
 		{EA273831-8221-4C07-9718-491BB405E3E4}.Debug|ARM.Build.0 = Debug|ARM
@@ -149,6 +133,22 @@ Global
 		{E96CE5C6-9F7C-4321-A0B8-F3C33FD79356}.Release|x86.ActiveCfg = Release|x86
 		{E96CE5C6-9F7C-4321-A0B8-F3C33FD79356}.Release|x86.Build.0 = Release|x86
 		{E96CE5C6-9F7C-4321-A0B8-F3C33FD79356}.Release|x86.Deploy.0 = Release|x86
+		{09D1FCBB-76FF-42B7-9344-6BB45AC5CEC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09D1FCBB-76FF-42B7-9344-6BB45AC5CEC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09D1FCBB-76FF-42B7-9344-6BB45AC5CEC3}.Debug|ARM.ActiveCfg = Debug|ARM
+		{09D1FCBB-76FF-42B7-9344-6BB45AC5CEC3}.Debug|ARM.Build.0 = Debug|ARM
+		{09D1FCBB-76FF-42B7-9344-6BB45AC5CEC3}.Debug|x64.ActiveCfg = Debug|x64
+		{09D1FCBB-76FF-42B7-9344-6BB45AC5CEC3}.Debug|x64.Build.0 = Debug|x64
+		{09D1FCBB-76FF-42B7-9344-6BB45AC5CEC3}.Debug|x86.ActiveCfg = Debug|x86
+		{09D1FCBB-76FF-42B7-9344-6BB45AC5CEC3}.Debug|x86.Build.0 = Debug|x86
+		{09D1FCBB-76FF-42B7-9344-6BB45AC5CEC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09D1FCBB-76FF-42B7-9344-6BB45AC5CEC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09D1FCBB-76FF-42B7-9344-6BB45AC5CEC3}.Release|ARM.ActiveCfg = Release|ARM
+		{09D1FCBB-76FF-42B7-9344-6BB45AC5CEC3}.Release|ARM.Build.0 = Release|ARM
+		{09D1FCBB-76FF-42B7-9344-6BB45AC5CEC3}.Release|x64.ActiveCfg = Release|x64
+		{09D1FCBB-76FF-42B7-9344-6BB45AC5CEC3}.Release|x64.Build.0 = Release|x64
+		{09D1FCBB-76FF-42B7-9344-6BB45AC5CEC3}.Release|x86.ActiveCfg = Release|x86
+		{09D1FCBB-76FF-42B7-9344-6BB45AC5CEC3}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
