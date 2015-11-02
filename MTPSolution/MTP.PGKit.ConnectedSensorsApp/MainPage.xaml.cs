@@ -50,7 +50,7 @@ namespace MTP.PGKit.ConnectedSensorsApp
                 adcManager = new AdcProviderManager();
                 lightVals = new List<double>();
                 deviceClient = DeviceClient
-                                .CreateFromConnectionString("<YOURCONNECTIONSTRING>", 
+                                .CreateFromConnectionString("HostName=TelemetryHub.azure-devices.net;DeviceId=PGKit1;SharedAccessKey=TuU5wrAKXt6+LtxkRUXplGB9yR/x2xCEyX7pSkERtcM=", 
                                 TransportType.Http1);
 
                 //Insert 10 dummy values to initialize.
