@@ -1,0 +1,60 @@
+﻿<div class="jumbotron">
+    <h1>Telemetry Visualizer</h1>
+        <script type="text/javascript"
+                src="https://www.google.com/jsapi?autoload={
+            'modules':[{
+              'name':'visualization',
+              'version':'1',
+              'packages':['corechart']
+            }]
+          }"></script>
+
+        <script type="text/javascript">
+           
+            setInterval(getNewData, 2000)
+            function getNewData() {
+                $.ajax(
+                    {
+                        url: "/api/Temperatures",
+                        success: drawChart
+                    });
+            }
+
+            function drawChart(data) {
+                var dataTable = new google.visualization.DataTable();
+                dataTable.addColumn("datetime", "CollectionTime");
+                dataTable.addColumn("number", "PGKit1");
+                //dataTable.addColumn("number", "PGKit2");
+
+                for (var key in data)
+                {
+                    var d = new Date(data[key].CollectionTime);
+                    dataTable.addRow([d, data[key].Temperature1]);
+                }
+
+                var options = {
+                  title: 'Telemetry Visualizer',
+                  curveType: 'function',
+                  legend: { position: 'bottom' }
+                };
+
+                var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+                chart.draw(dataTable, options);
+        }
+        </script>
+        <div id="curve_chart" style="width: 900px; height: 500px"></div>
+    </div>
+<div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
+    </div>
+</div>

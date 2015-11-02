@@ -6,7 +6,8 @@
     "Microsoft.AspNet.Mvc": "6.0.0-beta5",
     "Microsoft.AspNet.Server.IIS": "1.0.0-beta5",
     "Microsoft.AspNet.Server.WebListener": "1.0.0-beta5",
-    "Microsoft.AspNet.StaticFiles": "1.0.0-beta5"
+    "Microsoft.AspNet.StaticFiles": "1.0.0-beta5",
+    "EntityFramework": "6.1.3"
   },
 
   "commands": {
@@ -16,7 +17,6 @@
   "frameworks": {
     "dnx451": {
       "dependencies": {
-        "MTP.Core": "1.0.0-*"
       }
     },
     "dnxcore50": { }
