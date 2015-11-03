@@ -14,6 +14,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{31790523-D415-4255-825F-F0DDF3F17908}"
 	ProjectSection(SolutionItems) = preProject
 		Documentation\Intro_to_Electronics_1.pptx = Documentation\Intro_to_Electronics_1.pptx
+		Documentation\PGKit_ConnectedDevices.pptx = Documentation\PGKit_ConnectedDevices.pptx
 		Documentation\PGKit_Intro_to_Sensors.pptx = Documentation\PGKit_Intro_to_Sensors.pptx
 	EndProjectSection
 EndProject

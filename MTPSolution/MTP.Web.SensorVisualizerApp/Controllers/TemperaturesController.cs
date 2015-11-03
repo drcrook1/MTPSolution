@@ -20,7 +20,9 @@ namespace MTP.Web.SensorVisualizerApp.Controllers
         // GET: api/Temperatures
         public IQueryable<Temperature> GetTemperatures()
         {
-            return db.Temperatures.OrderByDescending(x => x.CollectionTime);
+            return db.Temperatures
+                .OrderByDescending(x => x.CollectionTime)
+                .Take(500);
         }
 
         // GET: api/Temperatures/5
