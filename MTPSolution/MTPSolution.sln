@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		Documentation\Intro_to_Electronics_1.pptx = Documentation\Intro_to_Electronics_1.pptx
 		Documentation\PGKit_ConnectedDevices.pptx = Documentation\PGKit_ConnectedDevices.pptx
 		Documentation\PGKit_Intro_to_Sensors.pptx = Documentation\PGKit_Intro_to_Sensors.pptx
+		Documentation\Setup_RaspberryPi.pptx = Documentation\Setup_RaspberryPi.pptx
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTP.PGKit.ConnectedSensorsApp", "MTP.PGKit.ConnectedSensorsApp\MTP.PGKit.ConnectedSensorsApp.csproj", "{E96CE5C6-9F7C-4321-A0B8-F3C33FD79356}"

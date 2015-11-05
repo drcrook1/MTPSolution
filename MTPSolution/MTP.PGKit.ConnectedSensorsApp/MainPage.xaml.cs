@@ -152,7 +152,11 @@ namespace MTP.PGKit.ConnectedSensorsApp
             {
                 await deviceClient.SendEventAsync(msg);
             }
-            catch (Exception e) { }
+            catch (Exception e)
+            {
+                int i = 0;
+                i += 2;
+            }
         }
 
 
