@@ -32,9 +32,9 @@ namespace MTP.PGKit.ConnectedSensorsApp
         private List<double> lightVals;
         private List<double> tempVals;
         DeviceClient deviceClient;
-        private string Location = "MIC Miami";
+        private string Location = "David's House";
         private string DeviceId = "PGKit1";
-        private string IoTHubConnString = "HostName=TelemetryHub.azure-devices.net;DeviceId=PGKit1;SharedAccessKey=TuU5wrAKXt6+LtxkRUXplGB9yR/x2xCEyX7pSkERtcM=";
+        private string IoTHubConnString = "HostName=moremessages.azure-devices.net;DeviceId=PGKit1;SharedAccessKey=cYTw65qaE27cw5pkMp1hV81ILy8SS2keMrEINnXCaqU=";
         private DispatcherTimer timer;
 
         public MainPage()
@@ -55,7 +55,7 @@ namespace MTP.PGKit.ConnectedSensorsApp
                             .CreateFromConnectionString(IoTHubConnString,
                             TransportType.Http1);
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(2000);
+            timer.Interval = TimeSpan.FromMilliseconds(500);
             timer.Tick += BroadcastTelemetry;
             timer.Start();
             //Insert 10 dummy values to initialize.
