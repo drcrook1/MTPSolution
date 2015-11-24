@@ -108,6 +108,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Devices\Adc\McpClassAdc.cs" />
+    <Compile Include="Devices\MotorDrivers\GpioMotorController.cs" />
+    <Compile Include="Devices\MotorDrivers\IMotorController.cs" />
+    <Compile Include="Devices\MotorDrivers\L289N.cs" />
+    <Compile Include="Devices\Sensors\HCSR04.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Properties\MTP.IoT.rd.xml" />
   </ItemGroup>
