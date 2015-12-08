@@ -1,7 +1,6 @@
 ﻿using Microsoft.IoT.DeviceCore.Adc;
 using Microsoft.IoT.DeviceCore.Sensors;
 using Microsoft.IoT.Devices.Sensors;
-using MTP.IoT.Devices.Adc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +13,7 @@ using Windows.UI.Xaml.Media;
 using Microsoft.Azure.Devices.Client;
 using System.Text;
 using MTP.DeviceCore.TelemetryObj;
+using Microsoft.IoT.Devices.Adc;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -48,7 +48,7 @@ namespace MTP.PGKit.ConnectedSensorsApp
         {
             //Initialize objects
             gpioController = GpioController.GetDefault();
-            IAdcControllerProvider MCP3008_SPI0 = new McpClassAdc();
+            IAdcControllerProvider MCP3008_SPI0 = new MCP3008();
             adcManager = new AdcProviderManager();
             lightVals = new List<double>();
             deviceClient = DeviceClient
@@ -69,14 +69,6 @@ namespace MTP.PGKit.ConnectedSensorsApp
             {
                 tempVals.Add(0);
             }
-            //Initialize MCP3008 device.
-            //Remember, 8 channels, 10 bit resolution
-            //We wired up to SPI0 of pi with Chip select 0.
-            ((McpClassAdc)MCP3008_SPI0).ChannelCount = 8;
-            ((McpClassAdc)MCP3008_SPI0).ChannelMode = ProviderAdcChannelMode.SingleEnded;
-            ((McpClassAdc)MCP3008_SPI0).ChipSelectLine = 0;
-            ((McpClassAdc)MCP3008_SPI0).ControllerName = "SPI0";
-            ((McpClassAdc)MCP3008_SPI0).ResolutionInBits = 10;
             #region ADC Provider Stuff
             //Add ADC Provider to list of providers
             adcManager.Providers.Add(MCP3008_SPI0);
