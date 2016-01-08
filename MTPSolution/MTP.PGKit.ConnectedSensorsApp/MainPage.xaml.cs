@@ -146,8 +146,6 @@ namespace MTP.PGKit.ConnectedSensorsApp
             }
             catch (Exception e)
             {
-                int i = 0;
-                i += 2;
             }
         }
 
