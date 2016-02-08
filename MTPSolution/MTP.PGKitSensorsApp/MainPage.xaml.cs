@@ -40,7 +40,7 @@ namespace MTP.PGKitSensorsApp
         {
             //Initialize objects
             gpioController = GpioController.GetDefault();
-            IAdcControllerProvider MCP3008_SPI0 = new McpClassAdc();
+            IAdcControllerProvider MCP3008_SPI0 = new MCP3008();
             adcManager = new AdcProviderManager();
             lightVals = new List<double>();
             //Insert 10 dummy values to initialize.
@@ -54,14 +54,6 @@ namespace MTP.PGKitSensorsApp
             {
                 tempVals.Add(0);
             }
-            //Initialize MCP3008 device.
-            //Remember, 8 channels, 10 bit resolution
-            //We wired up to SPI0 of pi with Chip select 0.
-            ((McpClassAdc)MCP3008_SPI0).ChannelCount = 8;
-            ((McpClassAdc)MCP3008_SPI0).ChannelMode = ProviderAdcChannelMode.SingleEnded;
-            ((McpClassAdc)MCP3008_SPI0).ChipSelectLine = 0;
-            ((McpClassAdc)MCP3008_SPI0).ControllerName = "SPI0";
-            ((McpClassAdc)MCP3008_SPI0).ResolutionInBits = 10;
             #region ADC Provider Stuff
             //Add ADC Provider to list of providers
             adcManager.Providers.Add(MCP3008_SPI0);
@@ -86,7 +78,7 @@ namespace MTP.PGKitSensorsApp
             var tempSensor = new AnalogSensor()
             {
                 AdcChannel = adcControllers[0].OpenChannel(6),
-                ReportInterval = 250
+                ReportInterval = 500
             };
             tempSensor.ReadingChanged += TempSensor_ReadingChanged;
             #endregion Temp Sensor Cheat Codes
@@ -95,7 +87,7 @@ namespace MTP.PGKitSensorsApp
         private async void TempSensor_ReadingChanged(IAnalogSensor sender, AnalogSensorReadingChangedEventArgs args)
         {
             var reading = args.Reading.Value;
-            tempVals.Add(((9/5) * (reading / 10)) + 32);
+            tempVals.Add(reading * 5000.0 / 1024.0 / 10.0);
             tempVals.RemoveAt(0);
             double temp = tempVals.Average();
             #region comment this out if running headless.

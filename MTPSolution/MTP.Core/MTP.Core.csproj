@@ -52,6 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EF\LightVal.cs" />
+    <Compile Include="EF\TelemetryDB.cs" />
+    <Compile Include="EF\Temperature.cs" />
     <Compile Include="EntityFramework\PhotoResistance.cs" />
     <Compile Include="EntityFramework\TelemetryDB.cs" />
     <Compile Include="EntityFramework\Temperature.cs" />

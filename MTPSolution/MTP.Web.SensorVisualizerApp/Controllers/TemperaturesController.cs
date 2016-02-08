@@ -9,7 +9,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using MTP.Core.EntityFramework;
+using MTP.Core.EF;
 
 namespace MTP.Web.SensorVisualizerApp.Controllers
 {
@@ -22,7 +22,7 @@ namespace MTP.Web.SensorVisualizerApp.Controllers
         {
             return db.Temperatures
                 .OrderByDescending(x => x.CollectionTime)
-                .Take(500);
+                .Take(100);
         }
 
         // GET: api/Temperatures/5

@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net452": {
+      "wrappedProject": "../../MTP.Core/MTP.Core.csproj",
+      "bin": {
+        "assembly": "../../MTP.Core/obj/{configuration}/MTP.Core.dll",
+        "pdb": "../../MTP.Core/obj/{configuration}/MTP.Core.pdb"
+      },
+      "dependencies": {
+        "EntityFramework": "6.1.3"
+      }
+    },
+    "net46": {
+      "wrappedProject": "../../MTP.Core/MTP.Core.csproj",
+      "bin": {
+        "assembly": "../../MTP.Core/obj/{configuration}/MTP.Core.dll",
+        "pdb": "../../MTP.Core/obj/{configuration}/MTP.Core.pdb"
+      },
+      "dependencies": {
+        "EntityFramework": "6.1.3"
+      }
+    }
+  }
+}

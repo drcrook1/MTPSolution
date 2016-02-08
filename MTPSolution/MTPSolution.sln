@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTP.BlinkyApp", "MTP.BlinkyApp\MTP.BlinkyApp.csproj", "{EA273831-8221-4C07-9718-491BB405E3E4}"
 EndProject
@@ -29,6 +29,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTP.Web.SensorVisualizerApp", "MTP.Web.SensorVisualizerApp\MTP.Web.SensorVisualizerApp.csproj", "{665955A8-7F67-42B1-9E07-01FBB22AA40A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTP.CarLab", "MTP.CarLab\MTP.CarLab.csproj", "{16102F41-8900-460A-BF61-D76511288D22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTP.BG.PGConnectedSensorsApp", "MTP.BG.PGConnectedSensorsApp\MTP.BG.PGConnectedSensorsApp.csproj", "{64786E31-3BC6-4EF3-9DA1-FF8437064F80}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -210,6 +212,26 @@ Global
 		{16102F41-8900-460A-BF61-D76511288D22}.Release|x86.ActiveCfg = Release|x86
 		{16102F41-8900-460A-BF61-D76511288D22}.Release|x86.Build.0 = Release|x86
 		{16102F41-8900-460A-BF61-D76511288D22}.Release|x86.Deploy.0 = Release|x86
+		{64786E31-3BC6-4EF3-9DA1-FF8437064F80}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{64786E31-3BC6-4EF3-9DA1-FF8437064F80}.Debug|ARM.ActiveCfg = Debug|ARM
+		{64786E31-3BC6-4EF3-9DA1-FF8437064F80}.Debug|ARM.Build.0 = Debug|ARM
+		{64786E31-3BC6-4EF3-9DA1-FF8437064F80}.Debug|ARM.Deploy.0 = Debug|ARM
+		{64786E31-3BC6-4EF3-9DA1-FF8437064F80}.Debug|x64.ActiveCfg = Debug|x64
+		{64786E31-3BC6-4EF3-9DA1-FF8437064F80}.Debug|x64.Build.0 = Debug|x64
+		{64786E31-3BC6-4EF3-9DA1-FF8437064F80}.Debug|x64.Deploy.0 = Debug|x64
+		{64786E31-3BC6-4EF3-9DA1-FF8437064F80}.Debug|x86.ActiveCfg = Debug|x86
+		{64786E31-3BC6-4EF3-9DA1-FF8437064F80}.Debug|x86.Build.0 = Debug|x86
+		{64786E31-3BC6-4EF3-9DA1-FF8437064F80}.Debug|x86.Deploy.0 = Debug|x86
+		{64786E31-3BC6-4EF3-9DA1-FF8437064F80}.Release|Any CPU.ActiveCfg = Release|x86
+		{64786E31-3BC6-4EF3-9DA1-FF8437064F80}.Release|ARM.ActiveCfg = Release|ARM
+		{64786E31-3BC6-4EF3-9DA1-FF8437064F80}.Release|ARM.Build.0 = Release|ARM
+		{64786E31-3BC6-4EF3-9DA1-FF8437064F80}.Release|ARM.Deploy.0 = Release|ARM
+		{64786E31-3BC6-4EF3-9DA1-FF8437064F80}.Release|x64.ActiveCfg = Release|x64
+		{64786E31-3BC6-4EF3-9DA1-FF8437064F80}.Release|x64.Build.0 = Release|x64
+		{64786E31-3BC6-4EF3-9DA1-FF8437064F80}.Release|x64.Deploy.0 = Release|x64
+		{64786E31-3BC6-4EF3-9DA1-FF8437064F80}.Release|x86.ActiveCfg = Release|x86
+		{64786E31-3BC6-4EF3-9DA1-FF8437064F80}.Release|x86.Build.0 = Release|x86
+		{64786E31-3BC6-4EF3-9DA1-FF8437064F80}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
